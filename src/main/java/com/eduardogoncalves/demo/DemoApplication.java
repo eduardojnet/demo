@@ -60,21 +60,27 @@ public class DemoApplication implements CommandLineRunner{
 				
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 				
 		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().addAll(Arrays.asList(cat1));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+		
 		
 		Estado est1 = new Estado(null, "São Paulo");
 		Estado est2 = new Estado(null, "Minas Gerais");
-		
+				
 		Cidade cid1 = new Cidade(null, "São Paulo", est1);
 		Cidade cid2 = new Cidade(null, "Belo Horizonte", est2);
 		Cidade cid3 = new Cidade(null, "Campinas", est1);
 		
 		est1.getCidades().addAll(Arrays.asList(cid1));
 		est2.getCidades().addAll(Arrays.asList(cid2, cid3));
-
+		
+		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
+				
 		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "03450859650", TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("3436628687", "11999328687"));
 		
@@ -83,19 +89,8 @@ public class DemoApplication implements CommandLineRunner{
 		
 		cli1.getEnderecos().addAll(Arrays.asList(end1, end2));
 		
-		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-		
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
-		
-		estadoRepository.saveAll(Arrays.asList(est1, est2));
-		
-		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
-		
 		clienteRepository.saveAll(Arrays.asList(cli1));
-		
-		enderecoRepository.saveAll(Arrays.asList(end1, end2));
-		
-		
+		enderecoRepository.saveAll(Arrays.asList(end1, end2));		
 		
 	}
 
