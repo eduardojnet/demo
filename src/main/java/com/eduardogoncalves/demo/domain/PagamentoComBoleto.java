@@ -1,32 +1,36 @@
 package com.eduardogoncalves.demo.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.eduardogoncalves.demo.domain.enums.EstadoPagamento;
 
 @Entity
-public class PagamentoComBoleto extends Pagamento implements Serializable {
+public class PagamentoComBoleto extends Pagamento {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dataPagamento;
 	
 	public PagamentoComBoleto() {
 		
 	}
 
-	public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
-		super(id, estado, pedido);
-		this.setDataPagamento(dataPagamento);
-		this.setDataVencimento(dataVencimento);
-	}
-
 	public Date getDataVencimento() {
 		return dataVencimento;
+	}
+
+	public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
+		super(id, estado, pedido);
+		this.dataVencimento = dataVencimento;
+		this.dataPagamento = dataPagamento;
 	}
 
 	public void setDataVencimento(Date dataVencimento) {

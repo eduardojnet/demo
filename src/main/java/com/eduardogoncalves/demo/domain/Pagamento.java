@@ -13,14 +13,13 @@ import javax.persistence.OneToOne;
 import com.eduardogoncalves.demo.domain.enums.EstadoPagamento;
 
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
-public class Pagamento implements Serializable {
-
+@Inheritance(strategy=InheritanceType.JOINED)  // 
+public abstract class Pagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private Integer id;
-	private EstadoPagamento estado;
+	private Integer estado;
 	
 	@OneToOne
 	@JoinColumn(name="pedidos_id")
@@ -33,9 +32,9 @@ public class Pagamento implements Serializable {
 
 	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
 		super();
-		this.setId(id);
-		this.setEstado(estado);
-		this.setPedido(pedido);
+		this.id = id;
+		this.estado = estado.getCod();
+		this.pedido = pedido;
 	}
 
 	public Pedido getPedido() {
@@ -55,11 +54,11 @@ public class Pagamento implements Serializable {
 	}
 
 	public EstadoPagamento getEstado() {
-		return estado;
+		return EstadoPagamento.toEnum(estado);
 	}
 
 	public void setEstado(EstadoPagamento estado) {
-		this.estado = estado;
+		this.estado = estado.getCod();
 	}
 
 	@Override
